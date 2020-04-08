@@ -10,6 +10,8 @@ public class SpawnBehaviour : MonoBehaviour
     public float deltaTimeRangeMax, deltaTimeRangeMin;
     private int _deltaTimeWave;
 
+    public bool spawnEnable;
+
     public int transX;
 
     // Start is called before the first frame update
@@ -23,7 +25,9 @@ public class SpawnBehaviour : MonoBehaviour
     {
         if (_deltaTimeWave <= 0) {
             _deltaTimeWave = deltaTimeWave;
-            CreateNewObstacle();
+
+            if(spawnEnable)
+                CreateNewObstacle();
         }
         _deltaTimeWave -= Mathf.RoundToInt(Random.Range(deltaTimeRangeMin, deltaTimeRangeMax));
     }
@@ -41,7 +45,7 @@ public class SpawnBehaviour : MonoBehaviour
                 Instantiate(ennemi, transform.position + Vector3.down * transX, new Quaternion()); break;
             case 3:
                 Instantiate(ennemi, transform.position, new Quaternion());
-                Instantiate(ennemi, transform.position + Vector3.forward * transX, new Quaternion()); break; break;
+                Instantiate(ennemi, transform.position + Vector3.forward * transX, new Quaternion()); break;
             case 4:
                 Instantiate(ennemi, transform.position, new Quaternion()); 
                 Instantiate(ennemi, transform.position + Vector3.down * transX, new Quaternion()); break;
