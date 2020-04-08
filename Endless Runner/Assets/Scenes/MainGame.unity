@@ -1259,11 +1259,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e76b34bafeee041906431dc6063fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ennemi: {fileID: 7200629500699414403, guid: 424b62d2245461b4fa58491173d08a3d, type: 3}
+  ennemies:
+  - {fileID: 7200629500699414403, guid: 424b62d2245461b4fa58491173d08a3d, type: 3}
+  - {fileID: 7200629500699414403, guid: 9a6964dfa6fd8d4479aed4e86396b608, type: 3}
   deltaTimeWave: 8000
   deltaTimeRangeMax: 1
   deltaTimeRangeMin: 100
-  spawnEnable: 0
+  spawnEnable: 1
   transX: 3
 --- !u!1 &1951935133
 GameObject:
