@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerCommand : MonoBehaviour
 {
+
+    public bool drawnDirection;
+    private Vector3 mousePosition;
+
+
     public GameObject area;
     public float vSpeed, hSpeed;
 
@@ -23,22 +28,29 @@ public class PlayerCommand : MonoBehaviour
     void Update()
     {
         OnPlayerTriggerKey();
+
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //keep position inside Area
+        mousePosition.x = mousePosition.x > area.GetComponent<Area>().x / 2 ? area.GetComponent<Area>().x / 2 : mousePosition.x;
+        mousePosition.x = mousePosition.x < -area.GetComponent<Area>().x / 2 ? -area.GetComponent<Area>().x / 2 : mousePosition.x;
+        mousePosition.y = mousePosition.y > area.GetComponent<Area>().y / 2 ? area.GetComponent<Area>().y / 2 : mousePosition.y;
+        mousePosition.y = mousePosition.y < -area.GetComponent<Area>().y / 2 ? -area.GetComponent<Area>().y / 2 : mousePosition.y;
+        mousePosition.z = 0;
+
+        Vector3 direction = mousePosition - transform.position;
+        transform.Translate(direction * vSpeed * Time.deltaTime, 0);
+
     }
 
     private void OnPlayerTriggerKey()
     {
-        //If player request up or down calculate new position
-        Vector3 newPosition = transform.position;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            newPosition = transform.position + Vector3.up * vSpeed;
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-            newPosition = transform.position - Vector3.up * vSpeed;
-        else if (Input.GetKeyDown(KeyCode.Space))
-            playerBehaviour.SwitchSpirit();
-        
+        //Right click left click power ?
+    }
 
-        //if new position are inside the area allow update position
-        if (newPosition.y < area.GetComponent<Area>().y/2 && newPosition.y > -area.GetComponent<Area>().y/2)
-            transform.position = newPosition;
+    private void OnDrawGizmos()
+    {
+        if (drawnDirection && mousePosition != null)
+            Gizmos.DrawLine(mousePosition, transform.position);
     }
 }
