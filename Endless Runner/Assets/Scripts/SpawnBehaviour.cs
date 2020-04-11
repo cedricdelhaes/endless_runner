@@ -42,7 +42,7 @@ public class SpawnBehaviour : MonoBehaviour
         int ennemy1 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
         int ennemy2 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
 
-        float randPositionY = Random.Range(-area.y, area.y);
+        float randPositionY = Random.Range(-area.y/2, area.y/2);
 
         switch (scheme) {
             case 0:

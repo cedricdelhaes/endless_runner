@@ -9,7 +9,6 @@ public class EnemyBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -17,5 +16,4 @@ public class EnemyBehaviour : MonoBehaviour
     {
         transform.Translate(-hSpeed, 0, 0);
     }
-
 }

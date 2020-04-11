@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Area.cs" />
     <Compile Include="Assets\Scripts\DestructZoneBehaviour.cs" />
     <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
+    <Compile Include="Assets\Scripts\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\MainGameBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerCommand.cs" />
