@@ -45,6 +45,8 @@ public class PlayerCommand : MonoBehaviour
 
     private void OnPlayerTriggerKey()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            playerBehaviour.SwitchSpirit();
         //Right click left click power ?
     }
 

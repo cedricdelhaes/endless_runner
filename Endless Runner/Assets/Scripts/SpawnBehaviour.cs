@@ -5,6 +5,9 @@ using UnityEngine;
 public class SpawnBehaviour : MonoBehaviour
 {
     public GameObject[] ennemies;
+    public GameObject ennemieOnArea;
+
+    public Area area;
 
     public int deltaTimeWave;
     public float deltaTimeRangeMax, deltaTimeRangeMin;
@@ -39,24 +42,26 @@ public class SpawnBehaviour : MonoBehaviour
         int ennemy1 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
         int ennemy2 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
 
+        float randPositionY = Random.Range(-area.y, area.y);
+
         switch (scheme) {
             case 0:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion()); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform); break;
             case 1:
-                Instantiate(ennemies[ennemy1], transform.position+Vector3.up*transX, new Quaternion()); break;
+                Instantiate(ennemies[ennemy1], transform.position+Vector3.up* randPositionY, new Quaternion(), ennemieOnArea.transform); break;
             case 2:
-                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * transX, new Quaternion()); break;
+                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
             case 3:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion());
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * transX, new Quaternion()); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform);
+                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
             case 4:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion()); 
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.down * transX, new Quaternion()); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform); 
+                Instantiate(ennemies[ennemy2], transform.position + Vector3.down * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
             case 5:
-                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * transX, new Quaternion());
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * transX, new Quaternion()); break;
+                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(), ennemieOnArea.transform);
+                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
             default:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion()); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform); break;
 
         };
     }
