@@ -14,6 +14,12 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(-hSpeed, 0, 0);
+        transform.Translate(hSpeed, 0, 0);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.right * 1);
     }
 }

@@ -46,22 +46,22 @@ public class SpawnBehaviour : MonoBehaviour
 
         switch (scheme) {
             case 0:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0,0,90,0), ennemieOnArea.transform); break;
             case 1:
-                Instantiate(ennemies[ennemy1], transform.position+Vector3.up* randPositionY, new Quaternion(), ennemieOnArea.transform); break;
+                Instantiate(ennemies[ennemy1], transform.position+Vector3.up* randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
             case 2:
-                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
+                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
             case 3:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform);
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform);
+                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
             case 4:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform); 
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.down * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); 
+                Instantiate(ennemies[ennemy2], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
             case 5:
-                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(), ennemieOnArea.transform);
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(), ennemieOnArea.transform); break;
+                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform);
+                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
             default:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(), ennemieOnArea.transform); break;
+                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
 
         };
     }
