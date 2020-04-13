@@ -24,5 +24,10 @@ public class FieldOfViewEditor : Editor
         Handles.DrawLine(fow.transform.position, new Vector3(x1,y1, 0));
         Handles.DrawLine(fow.transform.position, new Vector3(x2, y2, 0));
 
+        foreach (Transform target in fow.visibleTargets)
+        {
+            Handles.color = Color.blue;
+            Handles.DrawLine(fow.transform.position, target.position);
+        }
     }
 }

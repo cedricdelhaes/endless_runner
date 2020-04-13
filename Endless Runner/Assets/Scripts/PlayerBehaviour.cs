@@ -16,6 +16,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Renderer rendererPlayer;
 
+    public bool invincible;
+
 
     [SerializeField]
     private int _life;
@@ -63,7 +65,8 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             Destroy(other.gameObject);
-            life--;
+            if(!invincible)
+                life--;
         }
     }
 
@@ -72,7 +75,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (spiritSlider.value == spiritSlider.maxValue || spiritSlider.value == spiritSlider.minValue)
         {
-            life--;
+            if(!invincible)
+                life--;
             spiritSlider.value = 0;
         }
     }
