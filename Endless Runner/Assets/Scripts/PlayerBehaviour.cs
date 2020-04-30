@@ -10,12 +10,6 @@ public class PlayerBehaviour : MonoBehaviour
     public Slider spiritSlider;
     public float spiritIncrement;
 
-    public float colorFactor;
-    public float r, v, b;
-    public Color playerColor;
-
-    private Renderer rendererPlayer;
-
     public bool invincible;
 
 
@@ -33,9 +27,6 @@ public class PlayerBehaviour : MonoBehaviour
     private void Start() {
         spiritAngel = true;
         spiritSlider.value = 0;
-
-        playerColor = new Color(0,0,0,125);
-        rendererPlayer = gameObject.GetComponent<Renderer>();
     }  
 
     private void Update(){
@@ -45,19 +36,6 @@ public class PlayerBehaviour : MonoBehaviour
             spiritSlider.value += spiritIncrement;
         else
             spiritSlider.value -= spiritIncrement;
-
-        //RGB value according spiritSlider value (/255 new Color() take 1) RED Demon => White Angel
-        r = Mathf.Abs(spiritSlider.value*colorFactor) * 2.55f/255;
-        v = spiritSlider.value < 0 ? 0 : spiritSlider.value * colorFactor * 2.55f/255;
-        b = spiritSlider.value < 0 ? 0 : spiritSlider.value * colorFactor * 2.55f/255;
-        playerColor.r = r;
-        playerColor.g = v;
-        playerColor.b = b;
-        playerColor.a = 125;
-
-        //playerColor = new Color(r, v, b, 125);
-
-        rendererPlayer.material.color = new Color(r,v,b, 125);
     }
 
 

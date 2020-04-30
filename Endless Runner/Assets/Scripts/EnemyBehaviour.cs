@@ -8,44 +8,68 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float separationRadius, alignmentRadius, cohesionRadius;
 
+    private GameObject player;
+
     FieldOfView fow;
-    Rigidbody rigidBody;
+    Rigidbody2D rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
         fow = GetComponent<FieldOfView>();
-        rigidBody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody2D>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        rigidBody.AddForce(-hSpeed, 0, 0,ForceMode.VelocityChange);
+        //rigidBody.AddForce(new Vector2(hSpeed, 0));
+        transform.Translate(hSpeed * Time.deltaTime, 0,0);
+        //BoidsBehaviour();
+    }
 
-        foreach(Transform neigbour in fow.visibleTargets)
+    private void BoidsBehaviour()
+    {
+        Vector2 boidForce = new Vector2();
+        Vector2 boidTorque = new Vector2();
+
+        foreach (Transform neigbour in fow.visibleTargets)
         {
-            if (neigbour == null)
+            if (neigbour == null && gameObject.tag != neigbour.tag)
                 continue;
-            if(Vector3.Distance(neigbour.position,transform.position) <= separationRadius) {
-                Vector3 separationForce = neigbour.position - transform.position;
-                rigidBody.AddForce(-separationForce.x, -separationForce.y, 0, ForceMode.VelocityChange);
-            } else if (Vector3.Distance(neigbour.position, transform.position) <= alignmentRadius)
-            {
-                Vector3 alignmentForce = neigbour.eulerAngles - transform.eulerAngles;
-                transform.Rotate(alignmentForce);
-            } else if (Vector3.Distance(neigbour.position, transform.position) <= cohesionRadius)
+
+            float dist = Vector3.Distance(neigbour.position, transform.position);
+            if (dist <= separationRadius)
             {
                 Vector3 separationForce = neigbour.position - transform.position;
-                rigidBody.AddForce(separationForce.x, separationForce.y, 0, ForceMode.VelocityChange);
+                //rigidBody.AddForce(- 1/dist * separationForce.x, - 1/dist * separationForce.y, 0, ForceMode.Impulse);
+                boidForce += new Vector2(-1 / dist * separationForce.x, -1 / dist * separationForce.y);
+            }
+            else if (dist <= alignmentRadius)
+            {
+                Vector2 alignmentForce = neigbour.eulerAngles - transform.eulerAngles;
+                //transform.Rotate(alignmentForce);
+                //rigidBody.AddTorque(alignmentForce, ForceMode.Impulse);
+                boidTorque += alignmentForce;
+            }
+            else if (dist <= cohesionRadius)
+            {
+                Vector3 separationForce = neigbour.position - transform.position;
+                //rigidBody.AddForce(1/dist * separationForce.x, 1/dist * separationForce.y, 0, ForceMode.VelocityChange);
+                boidForce += new Vector2(1 / dist * separationForce.x, 1 / dist * separationForce.y);
             }
         }
-        
+
+        rigidBody.AddForce(boidForce);
+        rigidBody.AddTorque(boidTorque.x);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + transform.right * 1);
+       ;
     }
 }

@@ -30,12 +30,12 @@ public class SpawnBehaviour : MonoBehaviour
             _deltaTimeWave = deltaTimeWave;
 
             if(spawnEnable)
-                CreateNewObstacle();
+                CreateNewEnemy();
         }
         _deltaTimeWave -= Mathf.RoundToInt(Random.Range(deltaTimeRangeMin, deltaTimeRangeMax));
     }
 
-    public void CreateNewObstacle(){
+    public void CreateNewEnemy(){
 
         int scheme = Mathf.RoundToInt(Random.Range(0,5));
 

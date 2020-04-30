@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 public class UIElement : MonoBehaviour
 {
     public Text lifeText;
-    public PlayerBehaviour player;
+    private PlayerBehaviour player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehaviour>();
     }
 
     // Update is called once per frame
