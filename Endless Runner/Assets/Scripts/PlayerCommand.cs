@@ -8,6 +8,8 @@ public class PlayerCommand : MonoBehaviour
     public bool drawnDirection;
     private Vector3 mousePosition;
 
+    public Animator playerAnimation;
+
 
     public GameObject area;
     public float vSpeed, hSpeed;
@@ -39,6 +41,9 @@ public class PlayerCommand : MonoBehaviour
         mousePosition.z = 0;
 
         Vector3 direction = mousePosition - transform.position;
+
+        playerAnimation.SetBool("player_up", (direction.x > 0 && direction.y > 0));
+
         transform.Translate(direction * vSpeed * Time.deltaTime, 0);
 
     }

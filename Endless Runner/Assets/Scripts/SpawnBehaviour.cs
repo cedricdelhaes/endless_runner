@@ -9,9 +9,9 @@ public class SpawnBehaviour : MonoBehaviour
 
     public Area area;
 
-    public int deltaTimeWave;
+    public int startTimeDelay;
     public float deltaTimeRangeMax, deltaTimeRangeMin;
-    private int _deltaTimeWave;
+    public float repeatRateDecreaseSpawnTimer;
 
     public bool spawnEnable;
 
@@ -20,49 +20,59 @@ public class SpawnBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke("CreateNewEnemy", startTimeDelay);
+        InvokeRepeating("DecreaseSpawnTimer", 0.5f, repeatRateDecreaseSpawnTimer);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_deltaTimeWave <= 0) {
-            _deltaTimeWave = deltaTimeWave;
-
-            if(spawnEnable)
-                CreateNewEnemy();
-        }
-        _deltaTimeWave -= Mathf.RoundToInt(Random.Range(deltaTimeRangeMin, deltaTimeRangeMax));
+        
     }
 
-    public void CreateNewEnemy(){
+    private void DecreaseSpawnTimer()
+    {
+        if (spawnEnable)
+        {
+            deltaTimeRangeMax = deltaTimeRangeMax - 0.1f < 0.1 ? deltaTimeRangeMax : deltaTimeRangeMax - 0.1f;
+            deltaTimeRangeMin = deltaTimeRangeMin - 0.1f < 0.1 ? deltaTimeRangeMin : deltaTimeRangeMin - 0.1f;
+        }
+    }
 
-        int scheme = Mathf.RoundToInt(Random.Range(0,5));
+    private void CreateNewEnemy(){
 
-        int ennemy1 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
-        int ennemy2 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
+        if (spawnEnable)
+        {
+            int scheme = Mathf.RoundToInt(Random.Range(0, 5));
 
-        float randPositionY = Random.Range(-area.y/2, area.y/2);
+            int ennemy1 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
+            int ennemy2 = Mathf.RoundToInt(Random.Range(0, ennemies.Length));
 
-        switch (scheme) {
-            case 0:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0,0,90,0), ennemieOnArea.transform); break;
-            case 1:
-                Instantiate(ennemies[ennemy1], transform.position+Vector3.up* randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
-            case 2:
-                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
-            case 3:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform);
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
-            case 4:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); 
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
-            case 5:
-                Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform);
-                Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
-            default:
-                Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+            float randPositionY = Random.Range((-area.y / 2 + ennemies[ennemy1].GetComponent<Collider2D>().bounds.size.y / 2), (area.y / 2 - ennemies[ennemy1].GetComponent<Collider2D>().bounds.size.y / 2));
 
-        };
+            switch (scheme)
+            {
+                case 0:
+                    Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+                case 1:
+                    Instantiate(ennemies[ennemy1], transform.position + Vector3.up * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+                case 2:
+                    Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+                case 3:
+                    Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform);
+                    Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+                case 4:
+                    Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform);
+                    Instantiate(ennemies[ennemy2], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+                case 5:
+                    Instantiate(ennemies[ennemy1], transform.position + Vector3.down * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform);
+                    Instantiate(ennemies[ennemy2], transform.position + Vector3.up * randPositionY, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+                default:
+                    Instantiate(ennemies[ennemy1], transform.position, new Quaternion(0, 0, 90, 0), ennemieOnArea.transform); break;
+
+            };
+        }
+
+        Invoke("CreateNewEnemy", Random.Range(deltaTimeRangeMin, deltaTimeRangeMax));
     }
 }
