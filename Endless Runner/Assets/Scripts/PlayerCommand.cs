@@ -42,7 +42,9 @@ public class PlayerCommand : MonoBehaviour
 
         Vector3 direction = mousePosition - transform.position;
 
-        playerAnimation.SetBool("player_up", (direction.x > 0 && direction.y > 0));
+        /*Give animation data to display sprite*/
+        playerAnimation.SetInteger("player_x", (int)direction.x);
+        playerAnimation.SetInteger("player_y", (int)direction.y);
 
         transform.Translate(direction * vSpeed * Time.deltaTime, 0);
 
