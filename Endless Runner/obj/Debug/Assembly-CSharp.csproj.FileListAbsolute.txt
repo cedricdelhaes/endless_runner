@@ -234,3 +234,5 @@ C:\Users\delha\Documents\Développement\Unity\endless_runner\Endless Runner\obj\
 C:\Users\delha\Documents\Développement\Unity\endless_runner\Endless Runner\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\delha\Documents\Développement\Unity\endless_runner\Endless Runner\obj\Debug\Assembly-CSharp.dll
 C:\Users\delha\Documents\Développement\Unity\endless_runner\Endless Runner\obj\Debug\Assembly-CSharp.pdb
+C:\Users\delha\Documents\Développement\Unity\endless_runner\Endless Runner\Temp\bin\Debug\Boo.Lang.dll
+C:\Users\delha\Documents\Développement\Unity\endless_runner\Endless Runner\Temp\bin\Debug\UnityEditor.UI.dll
